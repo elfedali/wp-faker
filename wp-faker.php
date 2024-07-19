@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -35,14 +35,20 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WP_FAKER_VERSION', '1.0.0' );
+define('WP_FAKER_VERSION', '1.0.0');
+
+/**
+ * Include the autoloader so we can dynamically include the rest of the classes.
+ */
+require  plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wp-faker-activator.php
  */
-function activate_wp_faker() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-faker-activator.php';
+function activate_wp_faker()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-faker-activator.php';
 	Wp_Faker_Activator::activate();
 }
 
@@ -50,19 +56,20 @@ function activate_wp_faker() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wp-faker-deactivator.php
  */
-function deactivate_wp_faker() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-faker-deactivator.php';
+function deactivate_wp_faker()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-faker-deactivator.php';
 	Wp_Faker_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wp_faker' );
-register_deactivation_hook( __FILE__, 'deactivate_wp_faker' );
+register_activation_hook(__FILE__, 'activate_wp_faker');
+register_deactivation_hook(__FILE__, 'deactivate_wp_faker');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wp-faker.php';
+require plugin_dir_path(__FILE__) . 'includes/class-wp-faker.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +80,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-faker.php';
  *
  * @since    1.0.0
  */
-function run_wp_faker() {
+function run_wp_faker()
+{
 
 	$plugin = new Wp_Faker();
 	$plugin->run();
-
 }
 run_wp_faker();
